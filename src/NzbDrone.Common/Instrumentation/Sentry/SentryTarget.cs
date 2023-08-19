@@ -277,15 +277,15 @@ namespace NzbDrone.Common.Instrumentation.Sentry
                             isSentry = false;
                         }
 
-                        var pgEx = logEvent.Exception as PostgresException;
-                        if (pgEx != null && FilteredPostgresErrorCodes.Contains(pgEx.SqlState))
+                        var postgresException = logEvent.Exception as PostgresException;
+                        if (postgresException != null && FilteredPostgresErrorCodes.Contains(postgresException.SqlState))
                         {
                             return false;
                         }
 
                         // We don't care about transient network and timeout errors
-                        var npgEx = logEvent.Exception as NpgsqlException;
-                        if (npgEx != null && npgEx.IsTransient)
+                        var npgsqlException = logEvent.Exception as NpgsqlException;
+                        if (npgsqlException != null && npgsqlException.IsTransient)
                         {
                             return false;
                         }
