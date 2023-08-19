@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using FluentAssertions;
@@ -13,7 +13,7 @@ namespace NzbDrone.Common.Test.TPLTests
     [Platform(Exclude = "MacOsX")]
     public class RateLimitServiceFixture : TestBase<RateLimitService>
     {
-        private DateTime _epoch;
+        private DateTime _epoch = new DateTime(1970, 1, 1);
 
         [SetUp]
         public void SetUp()
