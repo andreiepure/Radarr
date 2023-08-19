@@ -123,6 +123,7 @@ namespace NzbDrone.Core.Qualities
                 existing.MaxSize = definition.MaxSize;
                 existing.PreferredSize = definition.PreferredSize;
                 existing.Title = message.ResetTitles ? definition.Title : existing.Title;
+                existing.Weight = definition.Weight;
 
                 updateList.Add(existing);
             }
