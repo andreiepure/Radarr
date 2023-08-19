@@ -58,7 +58,7 @@ namespace NzbDrone.Core.Security
             var ipAddresses = GetIPAddresses(targetHostName);
             var certificateValidation = _configService.CertificateValidation;
 
-            if (certificateValidation == CertificateValidationType.Disabled)
+            if (certificateValidation == CertificateValidationType.Disabled || certificateValidation == CertificateValidationType.Disabled)
             {
                 return true;
             }
