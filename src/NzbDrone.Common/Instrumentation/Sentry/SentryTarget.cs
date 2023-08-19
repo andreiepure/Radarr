@@ -257,6 +257,20 @@ namespace NzbDrone.Common.Instrumentation.Sentry
                     {
                         var isSentry = true;
 
+                        foreach (var error in FilteredSQLiteErrors)
+                        {
+                            if (error == SQLiteErrorCode.Unknown)
+                            {
+                                foreach (var name in FilteredExceptionTypeNames)
+                                {
+                                    if (name == "UnauthorizedAccessException")
+                                    {
+                                        isSentry = false;
+                                    }
+                                }
+                            }
+                        }
+
                         var sqlEx = ex as SQLiteException;
                         if (sqlEx != null && FilteredSQLiteErrors.Contains(sqlEx.ResultCode))
                         {
