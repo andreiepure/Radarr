@@ -235,7 +235,7 @@ namespace NzbDrone.Common.Instrumentation.Sentry
                 return logEvent.Properties["Sentry"] != null;
             }
 
-            if (logEvent.Level >= LogLevel.Error && logEvent.Exception != null)
+            if (logEvent.Level >= LogLevel.Warn && logEvent.Exception != null)
             {
                 if (FilterEvents)
                 {
