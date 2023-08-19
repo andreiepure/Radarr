@@ -228,7 +228,7 @@ namespace NzbDrone.Common.Instrumentation.Sentry
             return fingerPrint;
         }
 
-        public bool IsSentryMessage(LogEventInfo logEvent)
+        public bool IsTrulySentryMessage(LogEventInfo logEvent)
         {
             if (logEvent.Properties.ContainsKey("Sentry"))
             {
@@ -328,7 +328,7 @@ namespace NzbDrone.Common.Instrumentation.Sentry
                 SentrySdk.AddBreadcrumb(logEvent.FormattedMessage, logEvent.LoggerName, level: BreadcrumbLevelMap[logEvent.Level]);
 
                 // don't report non-critical events without exceptions
-                if (!IsSentryMessage(logEvent))
+                if (!IsTrulySentryMessage(logEvent))
                 {
                     return;
                 }
