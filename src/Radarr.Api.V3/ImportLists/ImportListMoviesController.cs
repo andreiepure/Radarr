@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using NzbDrone.Core.Configuration;
 using NzbDrone.Core.ImportLists;
@@ -104,8 +105,18 @@ namespace Radarr.Api.V3.ImportLists
         {
             var newMovies = resource.ToModel();
 
+            var movieTitle = resource.FirstOrDefault().Title;
+
+            if (IsBannedMovie(movieTitle))
+            {
+                return null;
+            }
+
             return _addMovieService.AddMovies(newMovies, true).ToResource(0);
         }
+
+        private bool IsBannedMovie(string title) =>
+            Regex.IsMatch("BadTitle", title);
 
         private IEnumerable<ImportListMoviesResource> MapToResource(IEnumerable<Movie> movies, Language language)
         {
