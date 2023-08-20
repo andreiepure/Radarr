@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <!--only to import JS files-->
+    <Resource Include="../../frontend/src/**" />
+  </ItemGroup>
+</Project>
