@@ -235,7 +235,7 @@ namespace NzbDrone.Common.Instrumentation.Sentry
                 return logEvent.Properties["Sentry"] != null;
             }
 
-            if (logEvent.Level >= LogLevel.Warn && logEvent.Exception != null)
+            if (logEvent.Level >= LogLevel.Error && logEvent.Exception != null)
             {
                 if (FilterEvents)
                 {
@@ -271,8 +271,8 @@ namespace NzbDrone.Common.Instrumentation.Sentry
                             }
                         }
 
-                        var sqlEx = ex as SQLiteException;
-                        if (sqlEx != null && FilteredSQLiteErrors.Contains(sqlEx.ResultCode))
+                        var sqlException = ex as SQLiteException;
+                        if (sqlException != null && FilteredSQLiteErrors.Contains(sqlException.ResultCode))
                         {
                             isSentry = false;
                         }
